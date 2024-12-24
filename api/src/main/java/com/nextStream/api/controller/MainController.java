@@ -1,5 +1,6 @@
 package com.nextStream.api.controller;
 
+import com.nextStream.api.dto.response.PlaylistResponseDto;
 import com.nextStream.api.dto.response.UsersResponseDto;
 import com.nextStream.api.dto.response.VideoResponseDto;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,23 @@ public class MainController {
     @PostMapping("/video")
     public ResponseEntity<VideoResponseDto> videoPost() {
         return ResponseEntity.ok(new VideoResponseDto());
+    }
+
+    @GetMapping("/playlists/{id}")
+    public ResponseEntity<PlaylistResponseDto> playlist(@PathVariable Long id) {
+        //todo get playlist by id
+        return ResponseEntity.ok(new PlaylistResponseDto());
+    }
+
+    @GetMapping("/playlists")
+    public ResponseEntity<List<PlaylistResponseDto>> playlists() {
+        //todo get all playlists
+        return ResponseEntity.ok(List.of(new PlaylistResponseDto()));
+    }
+
+    @PostMapping("/playlist")
+    public ResponseEntity<PlaylistResponseDto> playlistPost() {
+        return ResponseEntity.ok(new PlaylistResponseDto());
     }
 
     @PostMapping("/users")
