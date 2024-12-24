@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:next_stream_mobile/feature/home/screen_home.dart';
 import 'package:next_stream_mobile/feature/home/view_model/cubit_home.dart';
-import 'package:next_stream_mobile/feature/upload/screen_upload.dart';
-import 'package:next_stream_mobile/feature/upload/view_model/cubit_upload.dart';
+import 'package:next_stream_mobile/feature/viewer/screen_upload.dart';
+import 'package:next_stream_mobile/feature/viewer/view_model/cubit_viewer.dart';
 
 /// The manager class for the application routes.
 final class AppRoutes {
   static const String home = '/';
-  static const String upload = '/upload';
+  static const String viewer = '/upload';
 
   /// Generates the routes for the application. Uses in the
   /// [MaterialApp.onGenerateRoute] property.
@@ -27,15 +27,15 @@ final class AppRoutes {
             child: const ScreenHome(),
           ),
         );
-      case upload:
+      case viewer:
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider<CubitUpload>(
-                create: (_) => CubitUpload(),
+              BlocProvider<CubitViewer>(
+                create: (_) => CubitViewer(),
               ),
             ],
-            child: const ScreenUpload(),
+            child: const ScreenViewer(),
           ),
         );
       default:
