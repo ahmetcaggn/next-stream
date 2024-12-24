@@ -3,6 +3,8 @@ package com.nextStream.api.controller;
 import com.nextStream.api.dto.response.PlaylistResponseDto;
 import com.nextStream.api.dto.response.UsersResponseDto;
 import com.nextStream.api.dto.response.VideoResponseDto;
+import com.nextStream.api.service.UsersService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class MainController {
+    private final UsersService usersService;
+
     @GetMapping("/videos/{id}")
     public ResponseEntity<VideoResponseDto> video(@PathVariable Long id) {
         //todo get video by id
@@ -54,12 +59,14 @@ public class MainController {
 
     @GetMapping("/users")
     public ResponseEntity<List<UsersResponseDto>> users() {
-        return ResponseEntity.ok(List.of(new UsersResponseDto()));
+        List<UsersResponseDto> usersResponseDtos = usersService.findAll();
+        return ResponseEntity.ok(usersResponseDtos);
     }
 
     @GetMapping("/users/{id}")
     public ResponseEntity<UsersResponseDto> user(@PathVariable Long id) {
-        return ResponseEntity.ok(new UsersResponseDto());
+        UsersResponseDto usersResponseDto = usersService.findById(id);
+        return ResponseEntity.ok(usersResponseDto);
     }
 
 }
