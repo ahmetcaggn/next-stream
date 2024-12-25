@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:next_stream_mobile/feature/home/mixin/home_mixin.dart';
+import 'package:next_stream_mobile/feature/home/widget/home_header.dart';
 
 /// The home screen of the application.
 class ScreenHome extends StatefulWidget {
@@ -9,11 +11,14 @@ class ScreenHome extends StatefulWidget {
   State<ScreenHome> createState() => _ScreenHomeState();
 }
 
-class _ScreenHomeState extends State<ScreenHome> {
+class _ScreenHomeState extends State<ScreenHome> with HomeMixin {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: HomeHeader(
+        onUploadPressed: onUploadPressed,
+      ),
+      body: const Center(
         child: Text('HomeScreen'),
       ),
     );
