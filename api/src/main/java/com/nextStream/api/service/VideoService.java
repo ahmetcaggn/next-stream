@@ -4,6 +4,7 @@ import com.nextStream.api.dto.response.VideoResponseDto;
 import com.nextStream.api.entity.Video;
 import com.nextStream.api.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,14 +15,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 
 @Service
 @RequiredArgsConstructor
 public class VideoService {
     private final VideoRepository videoRepository;
 
-    private final String VIDEO_UPLOAD_PATH = "/home/ubuntu/Desktop/videos/";
+    @Value("${video.path}")
+    private static final String VIDEO_UPLOAD_PATH = "/home/ubuntu/Desktop/videos/";
 
     public void uploadVideo(MultipartFile file) {
         if (file.isEmpty()) {
