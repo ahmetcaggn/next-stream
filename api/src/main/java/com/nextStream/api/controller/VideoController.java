@@ -26,7 +26,7 @@ public class VideoController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> videoPost(@RequestBody MultipartFile file) {
+    public ResponseEntity<String> videoPost(@RequestParam("file") MultipartFile file) {
         videoService.uploadVideo(file);
         return ResponseEntity.ok("video uploaded");
     }

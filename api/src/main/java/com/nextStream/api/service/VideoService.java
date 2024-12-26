@@ -22,7 +22,7 @@ public class VideoService {
     private final VideoRepository videoRepository;
 
     @Value("${video.path}")
-    private static final String VIDEO_UPLOAD_PATH = "/home/ubuntu/Desktop/videos/";
+    private String VIDEO_UPLOAD_PATH;
 
     public void uploadVideo(MultipartFile file) {
         if (file.isEmpty()) {
@@ -34,7 +34,6 @@ public class VideoService {
             Path targetLocation = Paths.get(VIDEO_UPLOAD_PATH + fileName);
             Files.createDirectories(targetLocation.getParent());
             file.transferTo(targetLocation);
-
         } catch (IOException ex) {
             throw new RuntimeException("Error while uploading file");
         }
