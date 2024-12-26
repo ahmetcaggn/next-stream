@@ -14,8 +14,8 @@ public class VideoResponseDto {
     private Long id;
     private String title;
     private String description;
-    private String filePath;
-    private Timestamp creationDate;
+    private String fileName;
+    private Timestamp createdAt;
     private List<Playlist> playlists;
     private Long userId;
 
@@ -23,9 +23,11 @@ public class VideoResponseDto {
         this.id = video.getId();
         this.title = video.getTitle();
         this.description = video.getDescription();
-        this.filePath = video.getFilePath();
-        this.creationDate = video.getCreationDate();
+        this.fileName = video.getFileName();
+        this.createdAt = video.getCreatedAt();
         this.playlists = video.getPlaylist();
-        this.userId = video.getUser().getId();
+
+        // todo user impl : this.userId = video.getUser().getId();
+        this.userId = -1L;
     }
 }

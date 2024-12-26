@@ -1,11 +1,11 @@
 package com.nextStream.api.controller;
 
+import com.nextStream.api.dto.request.VideoUploadRequestDto;
 import com.nextStream.api.dto.response.VideoResponseDto;
 import com.nextStream.api.service.VideoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -26,8 +26,7 @@ public class VideoController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> videoPost(@RequestParam("file") MultipartFile file) {
-        videoService.uploadVideo(file);
-        return ResponseEntity.ok("video uploaded");
+    public ResponseEntity<VideoResponseDto> videoPost(@ModelAttribute VideoUploadRequestDto videoUploadRequestDto) {
+        return ResponseEntity.ok(videoService.saveVideo(videoUploadRequestDto));
     }
 }

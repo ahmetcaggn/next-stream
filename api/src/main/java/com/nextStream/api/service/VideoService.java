@@ -1,5 +1,6 @@
 package com.nextStream.api.service;
 
+import com.nextStream.api.dto.request.VideoUploadRequestDto;
 import com.nextStream.api.dto.response.VideoResponseDto;
 import com.nextStream.api.entity.Video;
 import com.nextStream.api.repository.VideoRepository;
@@ -15,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -22,18 +24,36 @@ public class VideoService {
     private final VideoRepository videoRepository;
 
     @Value("${video.path}")
-    private String VIDEO_UPLOAD_PATH;
+    private String storagePath;
 
-    public void uploadVideo(MultipartFile file) {
+    public VideoResponseDto saveVideo(VideoUploadRequestDto videoRequest) {
+        String savedFileName = uploadVideoToStorage(videoRequest.getFile());
+
+        Video video = Video.builder()
+                .title(videoRequest.getTitle())
+                .description(videoRequest.getDescription())
+                .fileName(savedFileName)
+                .build();
+
+        Video savedVideo = videoRepository.save(video);
+
+        return new VideoResponseDto(savedVideo);
+    }
+
+    public String uploadVideoToStorage(MultipartFile file) {
         if (file.isEmpty()) {
             throw new RuntimeException("The file is empty");
         }
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+
+        UUID uuid = UUID.randomUUID();
+        String fileExtension = StringUtils.getFilenameExtension(Objects.requireNonNull(file.getOriginalFilename()));
+        String fileName = String.format("%s.%s", uuid, fileExtension);
 
         try {
-            Path targetLocation = Paths.get(VIDEO_UPLOAD_PATH + fileName);
+            Path targetLocation = Paths.get(storagePath + fileName);
             Files.createDirectories(targetLocation.getParent());
             file.transferTo(targetLocation);
+            return fileName;
         } catch (IOException ex) {
             throw new RuntimeException("Error while uploading file");
         }
