@@ -1,7 +1,6 @@
 package com.nextStream.api.dto.response;
 
 import com.nextStream.api.entity.Users;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
