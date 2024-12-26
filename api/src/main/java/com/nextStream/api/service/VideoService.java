@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -22,16 +23,19 @@ public class VideoService {
     private final VideoRepository videoRepository;
 
     @Value("${video.path}")
-    private String VIDEO_UPLOAD_PATH;
+    private String storagePath;
 
     public void uploadVideo(MultipartFile file) {
         if (file.isEmpty()) {
             throw new RuntimeException("The file is empty");
         }
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+
+        UUID uuid = UUID.randomUUID();
+        String fileExtension = StringUtils.getFilenameExtension(Objects.requireNonNull(file.getOriginalFilename()));
+        String fileName = String.format("%s.%s", uuid, fileExtension);
 
         try {
-            Path targetLocation = Paths.get(VIDEO_UPLOAD_PATH + fileName);
+            Path targetLocation = Paths.get(storagePath + fileName);
             Files.createDirectories(targetLocation.getParent());
             file.transferTo(targetLocation);
         } catch (IOException ex) {
