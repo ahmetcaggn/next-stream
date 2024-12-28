@@ -1,6 +1,9 @@
 import 'package:next_stream_mobile/product/logger/app_logger.dart';
 import 'package:next_stream_mobile/product/logger/enum_log_level.dart';
 
+/// An helper class for logging. It provides the logger instances for each log
+/// level. And also, it has a method to log the message with the log level
+/// given dynamically.
 abstract final class L {
   /// Initializes the logger for the application.
   static void initForApp() {
