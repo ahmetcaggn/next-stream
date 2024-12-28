@@ -32,4 +32,12 @@ class RequestGetVideo implements IRequestCommand<ModelVideo> {
 
   @override
   ModelVideo get sampleModel => _sampleModel ??= ModelVideo.empty();
+
+  @override
+  String toLogString() {
+    return 'RequestGetVideo{'
+        'path: $path, '
+        'method: $method'
+        '}';
+  }
 }

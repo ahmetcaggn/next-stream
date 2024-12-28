@@ -18,4 +18,7 @@ abstract interface class IRequestCommand<T extends IResponseModel> {
 
   /// The sample model to deserialize the response via its fromJson function.
   T get sampleModel;
+
+  /// Converts the instance to a loggable string.
+  String toLogString();
 }

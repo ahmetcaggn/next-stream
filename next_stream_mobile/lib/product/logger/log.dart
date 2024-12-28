@@ -1,5 +1,6 @@
-import 'package:next_stream_mobile/product/logger/app_logger.dart';
-import 'package:next_stream_mobile/product/logger/log_level.dart';
+import 'package:next_stream_mobile/product/logger/core/enum/log_level.dart';
+import 'package:next_stream_mobile/product/logger/impl/app_logger.dart';
+import 'package:next_stream_mobile/product/logger/impl/app_trace_logger.dart';
 
 /// An helper class for logging. It provides the logger instances for each log
 /// level. And also, it has a method to log the message with the log level
@@ -7,7 +8,7 @@ import 'package:next_stream_mobile/product/logger/log_level.dart';
 abstract final class L {
   /// Initializes the logger for the application.
   static void initForApp() {
-    t = const AppLogger(tag: LogLevel.trace);
+    t = const AppTraceLogger(tag: LogLevel.trace);
     d = const AppLogger(tag: LogLevel.debug);
     i = const AppLogger(tag: LogLevel.info);
     w = const AppLogger(tag: LogLevel.warn);
@@ -36,7 +37,7 @@ abstract final class L {
   }
 
   /// The TRACE logger instance.
-  static late final AppLogger t;
+  static late final AppTraceLogger t;
 
   /// The DEBUG logger instance.
   static late final AppLogger d;

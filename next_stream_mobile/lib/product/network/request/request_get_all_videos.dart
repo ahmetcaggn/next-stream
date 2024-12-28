@@ -27,4 +27,14 @@ final class RequestGetAllVideos implements IRequestCommand<ModelListVideo> {
 
   @override
   ModelListVideo get sampleModel => _sampleModel;
+
+  @override
+  String toLogString() {
+    return 'RequestGetAllVideos{'
+        'path: $path, '
+        'method: $method, '
+        'headers(values obfuscated): ${headers.keys}, '
+        'data(values obfuscated): ${data.keys}'
+        '}';
+  }
 }

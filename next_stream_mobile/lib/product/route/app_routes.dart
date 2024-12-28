@@ -16,8 +16,16 @@ final class AppRoutes {
   /// Generates the routes for the application. Uses in the
   /// [MaterialApp.onGenerateRoute] property.
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    L.t('Route: ${settings.name}');
+    L.t('Route: $settings', start: true);
 
+    final result = _onGenerateRoute(settings);
+
+    L.t('${result.settings}', start: false);
+
+    return result;
+  }
+
+  Route<dynamic> _onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case home:
         return MaterialPageRoute(

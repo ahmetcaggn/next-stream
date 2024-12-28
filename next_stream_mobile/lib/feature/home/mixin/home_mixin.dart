@@ -19,13 +19,16 @@ mixin HomeMixin on State<ScreenHome> {
 
   /// Handles the event when the upload button is pressed.
   void onUploadPressed() {
-    L.t('Upload button pressed');
+    L.t('Upload button pressed', start: true);
+    L.t('Upload button pressed', start: false);
   }
 
   /// Handles the event when a video is pressed.
   void onVideoPressed(ModelVideo video) {
-    L.t('Video pressed: ${video.logString()}');
+    L.t('Video: ${video.toLogString()}', start: true);
 
     Navigator.pushNamed(context, AppRoutes.viewer);
+
+    L.t('', start: false);
   }
 }

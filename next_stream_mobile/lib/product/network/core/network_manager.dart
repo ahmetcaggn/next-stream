@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:next_stream_mobile/product/logger/core/enum/log_level.dart';
 import 'package:next_stream_mobile/product/logger/log.dart';
-import 'package:next_stream_mobile/product/logger/log_level.dart';
 import 'package:next_stream_mobile/product/network/core/i_network_manager.dart';
 import 'package:next_stream_mobile/product/network/core/request/i_request_command.dart';
 import 'package:next_stream_mobile/product/network/core/response/app_response_result.dart';
@@ -31,8 +31,17 @@ final class NetworkManager implements INetworkManager {
   @override
   Future<AppResponseResult<T>> request<T extends IResponseModel>(
       IRequestCommand<T> request) async {
-    L.t('Requesting: ${request.path}');
+    L.t('Request: ${request.toLogString()}', start: true);
 
+    final response = await _request(request);
+
+    L.t('Response: ${response.toLogString()}', start: false);
+
+    return response;
+  }
+
+  Future<AppResponseResult<T>> _request<T extends IResponseModel>(
+      IRequestCommand<T> request) async {
     late final Response<dynamic> response;
     try {
       response = await _dio.request<dynamic>(
