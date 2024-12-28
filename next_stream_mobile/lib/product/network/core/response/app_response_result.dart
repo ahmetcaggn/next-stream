@@ -1,9 +1,9 @@
+import 'package:next_stream_mobile/product/logger/enum_log_level.dart';
+import 'package:next_stream_mobile/product/logger/log.dart';
 import 'package:next_stream_mobile/product/network/core/response/i_response_model.dart';
 
 /// The base class of classes the network manager provides by default.
 sealed class AppResponseResult<T extends IResponseModel> {
-  const AppResponseResult();
-
   /// The status code of the response.
   int? get statusCode;
 
@@ -29,10 +29,12 @@ sealed class AppResponseResult<T extends IResponseModel> {
 final class AppResponseResultSuccess<T extends IResponseModel>
     extends AppResponseResult<T> {
   /// Creates instance of [AppResponseResultSuccess]
-  const AppResponseResultSuccess(
+  AppResponseResultSuccess(
     this.data, {
     this.statusCode = 200,
-  });
+  }) {
+    L.d('Response success: ${data.logString()}');
+  }
 
   /// The data of the response if it is successful.
   final T data;
@@ -48,7 +50,12 @@ final class AppResponseResultError<T extends IResponseModel>
   AppResponseResultError({
     required this.message,
     this.statusCode,
-  });
+    EnumLogLevel logLevel = EnumLogLevel.error,
+  }) {
+    L.getLogger(logLevel)(
+      'Response error${statusCode != null ? '<$statusCode>' : ''}: $message',
+    );
+  }
 
   /// The error message of the response if it is failed.
   final String message;
