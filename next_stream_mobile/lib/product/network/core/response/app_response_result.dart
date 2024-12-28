@@ -1,5 +1,5 @@
-import 'package:next_stream_mobile/product/logger/enum_log_level.dart';
 import 'package:next_stream_mobile/product/logger/log.dart';
+import 'package:next_stream_mobile/product/logger/log_level.dart';
 import 'package:next_stream_mobile/product/network/core/response/i_response_model.dart';
 
 /// The base class of classes the network manager provides by default.
@@ -50,7 +50,7 @@ final class AppResponseResultError<T extends IResponseModel>
   AppResponseResultError({
     required this.message,
     this.statusCode,
-    EnumLogLevel logLevel = EnumLogLevel.error,
+    LogLevel logLevel = LogLevel.error,
   }) {
     L.getLogger(logLevel)(
       'Response error${statusCode != null ? '<$statusCode>' : ''}: $message',

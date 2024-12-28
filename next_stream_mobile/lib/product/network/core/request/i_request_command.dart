@@ -1,4 +1,4 @@
-import 'package:next_stream_mobile/product/network/core/request/enum_http_request_method.dart';
+import 'package:next_stream_mobile/product/network/core/request/http_request_method.dart';
 import 'package:next_stream_mobile/product/network/core/response/i_response_model.dart';
 
 /// Interface for all requests types to the api.
@@ -7,7 +7,7 @@ abstract interface class IRequestCommand<T extends IResponseModel> {
   String get path;
 
   /// The method of the request. GET, POST, PUT, DELETE, etc.
-  EnumHttpRequestMethod get method;
+  HttpRequestMethod get method;
 
   /// The payload data of the request. Applicable in the form of Json or form
   /// data.

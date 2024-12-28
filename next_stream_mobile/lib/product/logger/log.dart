@@ -1,5 +1,5 @@
 import 'package:next_stream_mobile/product/logger/app_logger.dart';
-import 'package:next_stream_mobile/product/logger/enum_log_level.dart';
+import 'package:next_stream_mobile/product/logger/log_level.dart';
 
 /// An helper class for logging. It provides the logger instances for each log
 /// level. And also, it has a method to log the message with the log level
@@ -7,30 +7,30 @@ import 'package:next_stream_mobile/product/logger/enum_log_level.dart';
 abstract final class L {
   /// Initializes the logger for the application.
   static void initForApp() {
-    t = const AppLogger(tag: EnumLogLevel.trace);
-    d = const AppLogger(tag: EnumLogLevel.debug);
-    i = const AppLogger(tag: EnumLogLevel.info);
-    w = const AppLogger(tag: EnumLogLevel.warn);
-    e = const AppLogger(tag: EnumLogLevel.error);
-    f = const AppLogger(tag: EnumLogLevel.fatal);
+    t = const AppLogger(tag: LogLevel.trace);
+    d = const AppLogger(tag: LogLevel.debug);
+    i = const AppLogger(tag: LogLevel.info);
+    w = const AppLogger(tag: LogLevel.warn);
+    e = const AppLogger(tag: LogLevel.error);
+    f = const AppLogger(tag: LogLevel.fatal);
 
     i('Logger initialized');
   }
 
   /// Gets the logger instance for the given [level].
-  static AppLogger getLogger(EnumLogLevel level) {
+  static AppLogger getLogger(LogLevel level) {
     switch (level) {
-      case EnumLogLevel.trace:
+      case LogLevel.trace:
         return t;
-      case EnumLogLevel.debug:
+      case LogLevel.debug:
         return d;
-      case EnumLogLevel.info:
+      case LogLevel.info:
         return i;
-      case EnumLogLevel.warn:
+      case LogLevel.warn:
         return w;
-      case EnumLogLevel.error:
+      case LogLevel.error:
         return e;
-      case EnumLogLevel.fatal:
+      case LogLevel.fatal:
         return f;
     }
   }

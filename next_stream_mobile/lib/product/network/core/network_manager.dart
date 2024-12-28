@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:next_stream_mobile/product/logger/enum_log_level.dart';
 import 'package:next_stream_mobile/product/logger/log.dart';
+import 'package:next_stream_mobile/product/logger/log_level.dart';
 import 'package:next_stream_mobile/product/network/core/i_network_manager.dart';
 import 'package:next_stream_mobile/product/network/core/request/i_request_command.dart';
 import 'package:next_stream_mobile/product/network/core/response/app_response_result.dart';
@@ -31,7 +31,7 @@ final class NetworkManager implements INetworkManager {
   @override
   Future<AppResponseResult<T>> request<T extends IResponseModel>(
       IRequestCommand<T> request) async {
-    L.d('Requesting: ${request.path}');
+    L.t('Requesting: ${request.path}');
 
     late final Response<dynamic> response;
     try {
@@ -78,7 +78,7 @@ final class NetworkManager implements INetworkManager {
             '\nResponse data: <${responseData.runtimeType}> [$statusCode]'
             '\n$responseData',
         statusCode: statusCode,
-        logLevel: EnumLogLevel.warn,
+        logLevel: LogLevel.warn,
       );
     }
 

@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print it is logging library
 
-import 'package:next_stream_mobile/product/logger/enum_log_level.dart';
+import 'package:next_stream_mobile/product/logger/log_level.dart';
 
 /// A simple logger class to log messages with a tag. Create instances of this
 /// for each logging level you want to use.
@@ -11,11 +11,13 @@ class AppLogger {
   });
 
   /// The tag of the log will be logged with this object.
-  final EnumLogLevel tag;
+  final LogLevel tag;
 
   /// Logs the given [logMessage] with the tag of this object.
   ///
-  ///
+  /// If [stackTraceDepth] is provided, it will print the stack trace of the
+  /// current call with the given depth. The default value is `null`.
+  /// If the value is `null`, it will not print the stack trace.
   void call(
     String logMessage, {
     int? stackTraceDepth,

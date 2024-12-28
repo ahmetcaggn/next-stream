@@ -1,5 +1,5 @@
 import 'package:next_stream_mobile/product/network/core/api_endpoints.dart';
-import 'package:next_stream_mobile/product/network/core/request/enum_http_request_method.dart';
+import 'package:next_stream_mobile/product/network/core/request/http_request_method.dart';
 import 'package:next_stream_mobile/product/network/core/request/i_request_command.dart';
 import 'package:next_stream_mobile/product/network/response/model_video.dart';
 
@@ -19,13 +19,13 @@ class RequestGetVideo implements IRequestCommand<ModelVideo> {
   static ModelVideo? _sampleModel;
 
   @override
-  Map<String, dynamic> get data => {};
+  Map<String, dynamic> get data => const {};
 
   @override
-  Map<String, dynamic> get headers => {};
+  Map<String, dynamic> get headers => const {};
 
   @override
-  EnumHttpRequestMethod get method => EnumHttpRequestMethod.get;
+  HttpRequestMethod get method => HttpRequestMethod.get;
 
   @override
   String get path => ApiEndpoints.video(videoId);

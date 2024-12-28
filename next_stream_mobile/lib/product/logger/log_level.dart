@@ -1,5 +1,5 @@
 /// Enum for log level that can be used in the logger of the application.
-enum EnumLogLevel {
+enum LogLevel {
   /// Trace log level. Used for logging at the start and end of functions.
   trace,
 
@@ -23,17 +23,17 @@ enum EnumLogLevel {
   /// Get the value of the enum.
   String get value {
     switch (this) {
-      case EnumLogLevel.trace:
+      case LogLevel.trace:
         return 'TRACE';
-      case EnumLogLevel.debug:
+      case LogLevel.debug:
         return 'DEBUG';
-      case EnumLogLevel.info:
+      case LogLevel.info:
         return 'INFO';
-      case EnumLogLevel.warn:
+      case LogLevel.warn:
         return 'WARN';
-      case EnumLogLevel.error:
+      case LogLevel.error:
         return 'ERROR';
-      case EnumLogLevel.fatal:
+      case LogLevel.fatal:
         return 'FATAL';
     }
   }
