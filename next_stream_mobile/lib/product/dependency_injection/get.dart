@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs no need to document for instances.
 
 import 'package:get_it/get_it.dart';
-import 'package:next_stream_mobile/product/network/core/network_manager.dart';
+import 'package:next_stream_mobile/product/network/core/i_network_manager.dart';
 import 'package:next_stream_mobile/product/route/app_routes.dart';
 
 abstract final class G {
   static AppRoutes get appRoutes => GetIt.I.get<AppRoutes>();
-  static NetworkManager get networkManager => GetIt.I.get<NetworkManager>();
+  static INetworkManager get networkManager => GetIt.I.get<INetworkManager>();
 }

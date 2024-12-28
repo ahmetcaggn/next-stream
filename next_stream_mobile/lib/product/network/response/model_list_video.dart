@@ -32,4 +32,11 @@ class ModelListVideo implements IResponseModel {
   List<Map<String, dynamic>> toJson() {
     return videos.map((e) => e.toJson()).toList();
   }
+
+  @override
+  String logString() {
+    return 'ModelListVideo{'
+        'videos: ${videos.map<String>((e) => e.logString()).toList()}'
+        '}';
+  }
 }

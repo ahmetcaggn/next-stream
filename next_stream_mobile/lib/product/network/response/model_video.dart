@@ -70,4 +70,16 @@ class ModelVideo implements IResponseModel {
 
     return ModelVideo.fromJson(json);
   }
+
+  @override
+  String logString() {
+    return 'ModelVideo{'
+        'id: $id, '
+        'title: $title, '
+        'description: $description, '
+        'fileName: $fileName, '
+        'createdAt: $createdAt, '
+        'userId: $userId'
+        '}';
+  }
 }

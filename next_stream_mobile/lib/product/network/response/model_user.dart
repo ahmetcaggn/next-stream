@@ -46,4 +46,13 @@ class ModelUser implements IResponseModel {
 
     return ModelUser.fromJson(json);
   }
+
+  @override
+  String logString() {
+    return 'ModelUser{'
+        'id: $id, '
+        'username: $username, '
+        'email: $email'
+        '}';
+  }
 }
