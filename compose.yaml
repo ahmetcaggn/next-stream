@@ -1,0 +1,23 @@
+services:
+  postgres-db:
+    image: postgres
+    container_name: postgresdb
+    restart: always
+    ports:
+      - 5432:5432
+    secrets:
+      - db-credential
+    volumes:
+      - db-data-next-stream:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db-credential
+
+secrets:
+  db-credential:
+    file: db_credential.txt
+
+volumes:
+  db-data-next-stream:
+
