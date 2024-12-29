@@ -30,11 +30,14 @@ class _ScreenViewerState extends State<ScreenViewer> with MixinViewer {
       providers: [BlocProvider.value(value: cubit)],
       child: const Scaffold(
         appBar: _Header(),
-        body: Column(
-          children: [
-            _VideoPlayer(),
-            _ControlPanel(),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              _VideoPlayer(),
+              _ControlPanel(),
+              _TextSection(),
+            ],
+          ),
         ),
       ),
     );
@@ -108,6 +111,46 @@ class _ControlPanel extends StatelessWidget {
 
         return ViewerVideoController(
           controller: state.videoPlayerController,
+        );
+      },
+    );
+  }
+}
+
+class _TextSection extends StatelessWidget {
+  const _TextSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CubitViewer, StateViewer>(
+      builder: (_, state) {
+        if (state is! StateViewerLoaded) {
+          return const SizedBox.shrink();
+        }
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 12,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // to make the column full width
+              const Row(),
+
+              Text(
+                state.video.title ?? 'No title',
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                state.video.description ?? 'No description',
+                style: const TextStyle(fontSize: 16),
+              ),
+            ],
+          ),
         );
       },
     );
