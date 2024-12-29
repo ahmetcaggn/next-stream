@@ -7,9 +7,7 @@ import 'package:next_stream_mobile/product/network/core/response/i_response_mode
 /// requests to the api.
 abstract interface class INetworkManager {
   /// Initializes the network manager.
-  Future<void> init({
-    String? baseUrl,
-  });
+  Future<void> init();
 
   /// Sends a request to the api. The request properties are defined in the
   /// [request] parameter in type of [IRequestCommand] interface.

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:next_stream_mobile/product/logger/core/enum/log_level.dart';
 import 'package:next_stream_mobile/product/logger/log.dart';
+import 'package:next_stream_mobile/product/network/core/api_endpoints.dart';
 import 'package:next_stream_mobile/product/network/core/i_network_manager.dart';
 import 'package:next_stream_mobile/product/network/core/request/i_request_command.dart';
 import 'package:next_stream_mobile/product/network/core/response/app_response_result.dart';
@@ -15,10 +16,8 @@ final class NetworkManager implements INetworkManager {
 
   @override
   Future<void> init({
-    String? baseUrl,
+    String baseUrl = ApiEndpoints.baseUrl,
   }) async {
-    baseUrl ??= 'http://localhost:8080';
-
     _dio = Dio(BaseOptions(
       baseUrl: baseUrl,
       validateStatus: (status) => true,

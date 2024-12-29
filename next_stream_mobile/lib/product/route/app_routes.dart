@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:next_stream_mobile/feature/home/screen_home.dart';
 import 'package:next_stream_mobile/feature/home/view_model/cubit_home.dart';
+import 'package:next_stream_mobile/feature/viewer/argument_viewer.dart';
 import 'package:next_stream_mobile/feature/viewer/screen_viewer.dart';
 import 'package:next_stream_mobile/feature/viewer/view_model/cubit_viewer.dart';
 import 'package:next_stream_mobile/product/logger/log.dart';
@@ -46,7 +47,9 @@ final class AppRoutes {
                 create: (_) => CubitViewer(),
               ),
             ],
-            child: const ScreenViewer(),
+            child: ScreenViewer(
+              argument: settings.arguments! as ArgumentViewer,
+            ),
           ),
         );
       default:

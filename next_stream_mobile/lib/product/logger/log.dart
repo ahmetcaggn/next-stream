@@ -1,4 +1,5 @@
 import 'package:next_stream_mobile/product/logger/core/enum/log_level.dart';
+import 'package:next_stream_mobile/product/logger/impl/app_error_logger.dart';
 import 'package:next_stream_mobile/product/logger/impl/app_logger.dart';
 import 'package:next_stream_mobile/product/logger/impl/app_trace_logger.dart';
 
@@ -11,8 +12,8 @@ abstract final class L {
     t = const AppTraceLogger(tag: LogLevel.trace);
     d = const AppLogger(tag: LogLevel.debug);
     i = const AppLogger(tag: LogLevel.info);
-    w = const AppLogger(tag: LogLevel.warn);
-    e = const AppLogger(tag: LogLevel.error);
+    w = const AppErrorLogger(tag: LogLevel.warn);
+    e = const AppErrorLogger(tag: LogLevel.error);
     f = const AppLogger(tag: LogLevel.fatal);
 
     i('Logger initialized');
@@ -46,10 +47,10 @@ abstract final class L {
   static late final AppLogger i;
 
   /// The WARN logger instance.
-  static late final AppLogger w;
+  static late final AppErrorLogger w;
 
   /// The ERROR logger instance.
-  static late final AppLogger e;
+  static late final AppErrorLogger e;
 
   /// The FATAL logger instance.
   static late final AppLogger f;
