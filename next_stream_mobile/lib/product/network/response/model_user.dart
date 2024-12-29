@@ -29,6 +29,8 @@ class ModelUser implements IResponseModel {
   final String username;
   final String email;
 
+  static const sample = ModelUser.empty();
+
   @override
   Map<String, dynamic> toJson() {
     return {

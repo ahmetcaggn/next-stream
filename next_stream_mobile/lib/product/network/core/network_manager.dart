@@ -6,6 +6,7 @@ import 'package:next_stream_mobile/product/logger/log.dart';
 import 'package:next_stream_mobile/product/network/core/api_endpoints.dart';
 import 'package:next_stream_mobile/product/network/core/i_network_manager.dart';
 import 'package:next_stream_mobile/product/network/core/request/i_request_command.dart';
+import 'package:next_stream_mobile/product/network/core/request/request_payload_type.dart';
 import 'package:next_stream_mobile/product/network/core/response/app_response_result.dart';
 import 'package:next_stream_mobile/product/network/core/response/i_response_model.dart';
 
@@ -42,10 +43,25 @@ final class NetworkManager implements INetworkManager {
   Future<AppResponseResult<T>> _request<T extends IResponseModel>(
       IRequestCommand<T> request) async {
     late final Response<dynamic> response;
+
+    final Object? payload;
+    if (request.data.isEmpty) {
+      payload = null;
+    } else {
+      switch (request.payloadType) {
+        case RequestPayloadType.json:
+          payload = request.data;
+        case RequestPayloadType.formData:
+          payload = FormData.fromMap(request.data);
+      }
+    }
+
     try {
       response = await _dio.request<dynamic>(
         request.path,
-        data: request.data.isEmpty ? null : request.data,
+        data: payload,
+        onSendProgress: request.onSendProgressUpdate,
+        onReceiveProgress: request.onReceiveProgressUpdate,
         options: Options(
           method: request.method.value,
           headers: request.headers,

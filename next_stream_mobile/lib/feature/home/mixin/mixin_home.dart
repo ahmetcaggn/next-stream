@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:next_stream_mobile/feature/home/screen_home.dart';
 import 'package:next_stream_mobile/feature/home/view_model/cubit_home.dart';
+import 'package:next_stream_mobile/feature/upload/dialog_upload.dart';
 import 'package:next_stream_mobile/feature/viewer/argument_viewer.dart';
 import 'package:next_stream_mobile/product/logger/log.dart';
 import 'package:next_stream_mobile/product/network/response/model_video.dart';
@@ -19,8 +20,11 @@ mixin MixinHome on State<ScreenHome> {
   }
 
   /// Handles the event when the upload button is pressed.
-  void onUploadPressed() {
+  Future<void> onUploadPressed() async {
     L.t('Upload button pressed', start: true);
+
+    await DialogUpload.show(context);
+
     L.t('Upload button pressed', start: false);
   }
 
