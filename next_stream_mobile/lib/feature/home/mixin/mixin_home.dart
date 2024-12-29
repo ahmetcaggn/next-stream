@@ -19,6 +19,15 @@ mixin MixinHome on State<ScreenHome> {
     cubit.loadVideos();
   }
 
+  /// Handles the event when the refresh button is pressed.
+  Future<void> onRefreshPressed() async {
+    L.t('', start: true);
+
+    await cubit.loadVideos();
+
+    L.t('', start: false);
+  }
+
   /// Handles the event when the upload button is pressed.
   Future<void> onUploadPressed() async {
     L.t('Upload button pressed', start: true);

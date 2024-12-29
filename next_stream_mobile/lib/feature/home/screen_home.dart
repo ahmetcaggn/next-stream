@@ -23,6 +23,7 @@ class _ScreenHomeState extends State<ScreenHome> with MixinHome {
       child: Scaffold(
         appBar: HomeHeader(
           onUploadPressed: onUploadPressed,
+          onRefreshPressed: onRefreshPressed,
         ),
         body: Column(
           children: [
