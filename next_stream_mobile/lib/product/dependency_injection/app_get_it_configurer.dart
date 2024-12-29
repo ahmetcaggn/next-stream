@@ -9,8 +9,8 @@ abstract final class AppGetItConfigurer {
   /// Initializes the singleton instance of the [GetIt] class.
   static void init() {
     GetIt.I
-      ..registerSingleton<AppRoutes>(AppRoutes())
-      ..registerSingleton<INetworkManager>(NetworkManager());
+      ..registerLazySingleton<AppRoutes>(AppRoutes.new)
+      ..registerLazySingleton<INetworkManager>(NetworkManager.new);
 
     L.i('GetIt configured');
   }
