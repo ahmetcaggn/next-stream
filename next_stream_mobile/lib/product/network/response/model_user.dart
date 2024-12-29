@@ -48,7 +48,7 @@ class ModelUser implements IResponseModel {
   }
 
   @override
-  String logString() {
+  String toLogString() {
     return 'ModelUser{'
         'id: $id, '
         'username: $username, '

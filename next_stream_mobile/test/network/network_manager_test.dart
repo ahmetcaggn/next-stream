@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:next_stream_mobile/product/network/core/network_manager.dart';
-import 'package:next_stream_mobile/product/network/core/request/enum_http_request_method.dart';
+import 'package:next_stream_mobile/product/network/core/request/http_request_method.dart';
 import 'package:next_stream_mobile/product/network/core/response/app_response_result.dart';
 import 'package:next_stream_mobile/product/network/request/request_get_video.dart';
 
@@ -22,7 +22,7 @@ void main() async {
         // ignore: avoid_print test
         print('body: $bodyString');
 
-        if (request.method == EnumHttpRequestMethod.get.value) {
+        if (request.method == HttpRequestMethod.get.value) {
           if (request.uri.path == '/api/videos') {
             request.response
               ..statusCode = HttpStatus.ok
@@ -81,7 +81,7 @@ void main() async {
               ..statusCode = HttpStatus.notFound
               ..write('Not Found');
           }
-        } else if (request.method == EnumHttpRequestMethod.post.value) {
+        } else if (request.method == HttpRequestMethod.post.value) {
           if (request.uri.path == '/api/videos') {
             request.response
               ..statusCode = HttpStatus.ok

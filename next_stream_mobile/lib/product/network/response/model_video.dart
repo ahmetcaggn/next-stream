@@ -72,7 +72,7 @@ class ModelVideo implements IResponseModel {
   }
 
   @override
-  String logString() {
+  String toLogString() {
     return 'ModelVideo{'
         'id: $id, '
         'title: $title, '

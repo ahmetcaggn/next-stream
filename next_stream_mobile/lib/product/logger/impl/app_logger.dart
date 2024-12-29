@@ -1,31 +1,32 @@
 // ignore_for_file: avoid_print it is logging library
 
-import 'package:next_stream_mobile/product/logger/enum_log_level.dart';
+import 'package:next_stream_mobile/product/logger/app_logger_utils.dart';
+import 'package:next_stream_mobile/product/logger/core/enum/log_level.dart';
+import 'package:next_stream_mobile/product/logger/core/i_app_logger.dart';
 
 /// A simple logger class to log messages with a tag. Create instances of this
 /// for each logging level you want to use.
-class AppLogger {
+class AppLogger implements IAppLogger {
   /// Creates a new instance of the [AppLogger] with the given [tag].
   const AppLogger({
     required this.tag,
   });
 
-  /// The tag of the log will be logged with this object.
-  final EnumLogLevel tag;
+  @override
+  final LogLevel tag;
 
-  /// Logs the given [logMessage] with the tag of this object.
-  ///
-  ///
+  @override
   void call(
     String logMessage, {
     int? stackTraceDepth,
+    String? callerFunction,
   }) {
     print(
       '${DateTime.now()}'
       ' : '
       '${_right(5, tag.value)}'
       ' : '
-      '${_right(32, _callerFunction)}'
+      '${_right(32, callerFunction ?? AppLoggerUtils.callerFunction())}'
       ' : '
       '$logMessage'
       '${stackTraceDepth != null ? '\n${StackTrace.current}' : ''}',
@@ -46,17 +47,5 @@ class AppLogger {
       return text;
     }
     return ' ' * (width - text.length) + text;
-  }
-
-  String get _callerFunction {
-    const dept = 2;
-    final frames = StackTrace.current.toString().split('\n');
-    if (frames.length > dept) {
-      final callerFrame = frames[dept];
-      final match = RegExp(r'#\d+\s+(.+)\s+\(.+\)').firstMatch(callerFrame);
-      final result = match?.group(1);
-      if (result != null) return result;
-    }
-    return 'Unknown caller';
   }
 }

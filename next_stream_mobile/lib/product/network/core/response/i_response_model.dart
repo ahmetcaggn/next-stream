@@ -8,5 +8,5 @@ abstract interface class IResponseModel {
   IResponseModel fromJson(dynamic json);
 
   /// Converts the object to a loggable string.
-  String logString();
+  String toLogString();
 }

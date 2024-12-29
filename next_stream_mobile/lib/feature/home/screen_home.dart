@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:next_stream_mobile/feature/home/mixin/home_mixin.dart';
+import 'package:next_stream_mobile/feature/home/mixin/mixin_home.dart';
 import 'package:next_stream_mobile/feature/home/view_model/cubit_home.dart';
 import 'package:next_stream_mobile/feature/home/view_model/state_home.dart';
 import 'package:next_stream_mobile/feature/home/widget/home_header.dart';
@@ -15,13 +15,11 @@ class ScreenHome extends StatefulWidget {
   State<ScreenHome> createState() => _ScreenHomeState();
 }
 
-class _ScreenHomeState extends State<ScreenHome> with HomeMixin {
+class _ScreenHomeState extends State<ScreenHome> with MixinHome {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => cubit),
-      ],
+      providers: [BlocProvider.value(value: cubit)],
       child: Scaffold(
         appBar: HomeHeader(
           onUploadPressed: onUploadPressed,

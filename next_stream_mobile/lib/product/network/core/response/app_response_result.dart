@@ -1,4 +1,4 @@
-import 'package:next_stream_mobile/product/logger/enum_log_level.dart';
+import 'package:next_stream_mobile/product/logger/core/enum/log_level.dart';
 import 'package:next_stream_mobile/product/logger/log.dart';
 import 'package:next_stream_mobile/product/network/core/response/i_response_model.dart';
 
@@ -23,6 +23,15 @@ sealed class AppResponseResult<T extends IResponseModel> {
     assert(!isSuccess, 'The response is not an error response.');
     return this as AppResponseResultError<T>;
   }
+
+  /// Converts the instance to a loggable string.
+  String toLogString() {
+    if (isSuccess) {
+      return 'Success: ${this.asSuccess.data.toLogString()}';
+    } else {
+      return 'Error: ${this.asError.message}';
+    }
+  }
 }
 
 /// The standard success response from the network manager.
@@ -33,7 +42,7 @@ final class AppResponseResultSuccess<T extends IResponseModel>
     this.data, {
     this.statusCode = 200,
   }) {
-    L.d('Response success: ${data.logString()}');
+    L.d('Response success: ${data.toLogString()}');
   }
 
   /// The data of the response if it is successful.
@@ -50,7 +59,7 @@ final class AppResponseResultError<T extends IResponseModel>
   AppResponseResultError({
     required this.message,
     this.statusCode,
-    EnumLogLevel logLevel = EnumLogLevel.error,
+    LogLevel logLevel = LogLevel.error,
   }) {
     L.getLogger(logLevel)(
       'Response error${statusCode != null ? '<$statusCode>' : ''}: $message',

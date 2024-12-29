@@ -1,6 +1,8 @@
 package com.nextStream.api.service;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +25,8 @@ public class FileService {
         };
     }
 
-    public byte[] getFile(String fileName) {
+    public Resource getFileAsResource(String fileName) {
         Path targetLocation = Paths.get(storagePath + fileName);
-        try {
-            return Files.readAllBytes(targetLocation);
-        } catch (Exception ex) {
-            throw new RuntimeException("Error while reading file");
-        }
+        return new FileSystemResource(targetLocation.toFile());
     }
 }

@@ -2,7 +2,11 @@
 
 /// The static data class for organizing API endpoint constants.
 abstract final class ApiEndpoints {
+  static const String baseUrl = 'http://localhost:8080';
+
   static const String videos = '/api/videos';
   static String video(int id) => '/api/videos/$id';
   static const String createVideo = '/api/videos';
+
+  static String file(String fileName) => '/api/files/$fileName';
 }

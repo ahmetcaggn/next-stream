@@ -34,9 +34,9 @@ class ModelListVideo implements IResponseModel {
   }
 
   @override
-  String logString() {
+  String toLogString() {
     return 'ModelListVideo{'
-        'videos: ${videos.map<String>((e) => e.logString()).toList()}'
+        'videos: ${videos.map<String>((e) => e.toLogString()).toList()}'
         '}';
   }
 }

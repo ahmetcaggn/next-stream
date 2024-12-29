@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs no need for enum fields
 
-enum EnumHttpRequestMethod {
+enum HttpRequestMethod {
   get,
   post,
   patch,
@@ -12,17 +12,17 @@ enum EnumHttpRequestMethod {
   /// Returns the string value of the enum. Applicable with dio.
   String get value {
     switch (this) {
-      case EnumHttpRequestMethod.get:
+      case HttpRequestMethod.get:
         return 'GET';
-      case EnumHttpRequestMethod.post:
+      case HttpRequestMethod.post:
         return 'POST';
-      case EnumHttpRequestMethod.patch:
+      case HttpRequestMethod.patch:
         return 'PATCH';
-      case EnumHttpRequestMethod.put:
+      case HttpRequestMethod.put:
         return 'PUT';
-      case EnumHttpRequestMethod.delete:
+      case HttpRequestMethod.delete:
         return 'DELETE';
-      case EnumHttpRequestMethod.head:
+      case HttpRequestMethod.head:
         return 'HEAD';
     }
   }
