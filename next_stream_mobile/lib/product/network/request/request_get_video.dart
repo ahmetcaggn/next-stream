@@ -1,6 +1,7 @@
 import 'package:next_stream_mobile/product/network/core/api_endpoints.dart';
 import 'package:next_stream_mobile/product/network/core/request/http_request_method.dart';
 import 'package:next_stream_mobile/product/network/core/request/i_request_command.dart';
+import 'package:next_stream_mobile/product/network/core/request/request_payload_type.dart';
 import 'package:next_stream_mobile/product/network/response/model_video.dart';
 
 /// The request command for getting a video by its id.
@@ -16,7 +17,8 @@ class RequestGetVideo implements IRequestCommand<ModelVideo> {
   /// The id of the video to fetch.
   final int videoId;
 
-  static ModelVideo? _sampleModel;
+  @override
+  RequestPayloadType get payloadType => RequestPayloadType.json;
 
   @override
   Map<String, dynamic> get data => const {};
@@ -31,7 +33,13 @@ class RequestGetVideo implements IRequestCommand<ModelVideo> {
   String get path => ApiEndpoints.video(videoId);
 
   @override
-  ModelVideo get sampleModel => _sampleModel ??= ModelVideo.empty();
+  OnProgressCallback? get onReceiveProgressUpdate => null;
+
+  @override
+  OnProgressCallback? get onSendProgressUpdate => null;
+
+  @override
+  ModelVideo get sampleModel => ModelVideo.sample;
 
   @override
   String toLogString() {

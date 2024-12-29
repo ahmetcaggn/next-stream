@@ -50,6 +50,8 @@ class ModelVideo implements IResponseModel {
   final DateTime createdAt;
   final int userId;
 
+  static final sample = ModelVideo.empty();
+
   @override
   Map<String, dynamic> toJson() {
     return {

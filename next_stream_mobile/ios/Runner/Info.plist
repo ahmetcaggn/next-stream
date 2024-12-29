@@ -45,9 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-<key>NSAppTransportSecurity</key>
- <dict>
-      <key>NSAllowsArbitraryLoads</key><true/>
- </dict>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key><true/>
+    </dict>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>$(PRODUCT_NAME) would like access to your photo library</string>
 </dict>
 </plist>

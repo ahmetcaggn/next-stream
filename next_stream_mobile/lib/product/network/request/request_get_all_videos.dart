@@ -1,6 +1,7 @@
 import 'package:next_stream_mobile/product/network/core/api_endpoints.dart';
 import 'package:next_stream_mobile/product/network/core/request/http_request_method.dart';
 import 'package:next_stream_mobile/product/network/core/request/i_request_command.dart';
+import 'package:next_stream_mobile/product/network/core/request/request_payload_type.dart';
 import 'package:next_stream_mobile/product/network/response/model_list_video.dart';
 
 /// The request command for getting all videos.
@@ -11,7 +12,8 @@ final class RequestGetAllVideos implements IRequestCommand<ModelListVideo> {
   /// Creates instance of [RequestGetAllVideos] with empty data.
   const RequestGetAllVideos.empty();
 
-  static const _sampleModel = ModelListVideo.empty();
+  @override
+  RequestPayloadType get payloadType => RequestPayloadType.json;
 
   @override
   Map<String, dynamic> get data => const {};
@@ -26,15 +28,19 @@ final class RequestGetAllVideos implements IRequestCommand<ModelListVideo> {
   String get path => ApiEndpoints.videos;
 
   @override
-  ModelListVideo get sampleModel => _sampleModel;
+  OnProgressCallback? get onReceiveProgressUpdate => null;
+
+  @override
+  OnProgressCallback? get onSendProgressUpdate => null;
+
+  @override
+  ModelListVideo get sampleModel => ModelListVideo.sample;
 
   @override
   String toLogString() {
     return 'RequestGetAllVideos{'
         'path: $path, '
-        'method: $method, '
-        'headers(values obfuscated): ${headers.keys}, '
-        'data(values obfuscated): ${data.keys}'
+        'method: $method'
         '}';
   }
 }

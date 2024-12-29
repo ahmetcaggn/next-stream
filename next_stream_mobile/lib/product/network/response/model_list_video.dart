@@ -15,6 +15,8 @@ class ModelListVideo implements IResponseModel {
 
   final List<ModelVideo> videos;
 
+  static const sample = ModelListVideo.empty();
+
   @override
   IResponseModel fromJson(dynamic json) {
     if (json is! List) {
